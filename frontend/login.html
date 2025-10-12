@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Mory Laundry</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg { background: linear-gradient(135deg, #0077B6 0%, #00B4D8 100%); }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen flex items-center justify-center p-4">
+    
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl overflow-hidden">
+        <div class="flex flex-col md:flex-row">
+            
+            <!-- Left Side - Branding -->
+            <div class="gradient-bg text-white p-8 md:w-1/2 flex flex-col justify-center">
+                <div class="text-center">
+                    <i class="fas fa-tshirt text-6xl mb-4"></i>
+                    <h1 class="text-3xl font-bold mb-2">Mory Laundry</h1>
+                    <p class="text-lg">Solusi Cucian Cepat & Terpercaya</p>
+                    <div class="mt-8">
+                        <a href="index.html" class="text-white hover:underline flex items-center justify-center">
+                            <i class="fas fa-arrow-left mr-2"></i> Kembali ke Beranda
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side - Forms -->
+            <div class="p-8 md:w-1/2">
+                
+                <!-- Tab Buttons -->
+                <div class="flex border-b mb-6">
+                    <button id="login-tab" class="flex-1 py-3 text-center font-semibold border-b-2 border-blue-600 text-blue-600 transition">
+                        Login
+                    </button>
+                    <button id="register-tab" class="flex-1 py-3 text-center font-semibold text-gray-400 hover:text-gray-600 transition">
+                        Daftar
+                    </button>
+                </div>
+
+                <!-- Alert Container -->
+                <div id="alert-container" class="mb-4"></div>
+
+                <!-- Login Form -->
+                <div id="login-form" class="space-y-4">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Login ke Akun Anda</h2>
+                    
+                    <div>
+                        <label class="block text-gray-700 mb-2">Username</label>
+                        <input type="text" id="login-username" 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                               placeholder="Masukkan username">
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 mb-2">Password</label>
+                        <input type="password" id="login-password" 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                               placeholder="Masukkan password">
+                    </div>
+
+                    <button id="login-btn" 
+                            class="w-full gradient-bg text-white py-3 rounded-lg font-semibold hover:opacity-90 transition flex items-center justify-center">
+                        <i class="fas fa-sign-in-alt mr-2"></i> Login
+                    </button>
+                </div>
+
+                <!-- Register Form -->
+                <div id="register-form" class="space-y-4 hidden">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Buat Akun Baru</h2>
+                    
+                    <div>
+                        <label class="block text-gray-700 mb-2">Nama Lengkap</label>
+                        <input type="text" id="register-fullname" 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                               placeholder="Masukkan nama lengkap">
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 mb-2">Username</label>
+                        <input type="text" id="register-username" 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                               placeholder="Pilih username (min. 4 karakter)">
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 mb-2">Password</label>
+                        <input type="password" id="register-password" 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                               placeholder="Buat password (min. 6 karakter)">
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 mb-2">Konfirmasi Password</label>
+                        <input type="password" id="register-confirm-password" 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                               placeholder="Ulangi password">
+                    </div>
+
+                    <button id="register-btn" 
+                            class="w-full gradient-bg text-white py-3 rounded-lg font-semibold hover:opacity-90 transition flex items-center justify-center">
+                        <i class="fas fa-user-plus mr-2"></i> Daftar
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>

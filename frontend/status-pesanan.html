@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status Pesanan - Mory Laundry</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg { background: linear-gradient(135deg, #0077B6 0%, #00B4D8 100%); }
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    
+    <!-- Navigation -->
+    <nav class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-tshirt text-2xl"></i>
+                    <span class="text-2xl font-bold">Mory Laundry</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span id="user-name" class="hidden md:block">Loading...</span>
+                    <button id="logout-btn" class="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition">
+                        <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        
+        <!-- Header -->
+        <div class="bg-white rounded-lg shadow p-6 mb-6">
+            <h1 class="text-3xl font-bold text-blue-600 mb-2">Status Pesanan Anda</h1>
+            <p class="text-gray-600">Lihat riwayat dan status pesanan laundry Anda</p>
+        </div>
+
+        <!-- Alert Container -->
+        <div id="alert-container" class="mb-6"></div>
+
+        <!-- Orders Container -->
+        <div id="orders-container" class="space-y-4">
+            <!-- Loading State -->
+            <div class="bg-white rounded-lg shadow p-8 text-center">
+                <i class="fas fa-spinner fa-spin text-4xl text-blue-600 mb-4"></i>
+                <p class="text-gray-600">Memuat data pesanan...</p>
+            </div>
+        </div>
+
+        <!-- Back to Home Button -->
+        <div class="mt-8 text-center">
+            <a href="index.html" class="inline-block bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-lg transition">
+                <i class="fas fa-home mr-2"></i> Kembali ke Beranda
+            </a>
+        </div>
+
+    </div>
+
+    <script src="js/status.js"></script>
+</body>
+</html>
