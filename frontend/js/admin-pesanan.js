@@ -284,7 +284,7 @@ orderForm.addEventListener('submit', async (e) => {
         customer_name: document.getElementById('customer-name').value,
         phone_number: document.getElementById('phone-number').value || null,
         service_id: document.getElementById('service-id').value,
-        quantity: parseFloat(document.getElementById('quantity').value),
+        quantity: parseInt(document.getElementById('quantity').value),
         notes: document.getElementById('notes').value || null
     };
     
