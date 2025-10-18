@@ -52,10 +52,6 @@ function createServiceCard(service) {
                     Rp ${service.price.toLocaleString('id-ID')}
                     <span class="text-sm text-gray-500">/ ${service.unit}</span>
                 </div>
-                <a href="${whatsappLink}" target="_blank" 
-                   class="block w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 rounded-lg transition">
-                    <i class="fab fa-whatsapp mr-2"></i> Pesan Sekarang
-                </a>
             </div>
         </div>
     `;
@@ -64,4 +60,31 @@ function createServiceCard(service) {
 // Load services when page loads
 document.addEventListener('DOMContentLoaded', () => {
     loadServices();
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const navbarUser = document.getElementById("navbar-user");
+    const token = localStorage.getItem("token");
+    const username = localStorage.getItem("username");
+
+    if (token && username) {
+      navbarUser.innerHTML = `
+        <div class="flex items-center gap-2">
+          <i class="fas fa-user text-white"></i>
+          <span>${username}</span>
+          <button id="logoutBtn" class="ml-2 bg-white text-blue-600 px-3 py-1 rounded hover:bg-gray-100 transition">Logout</button>
+        </div>
+      `;
+
+      document.getElementById("logoutBtn").addEventListener("click", () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("username");
+        window.location.href = "index.html";
+      });
+
+    } else {
+      navbarUser.innerHTML = `
+        <a href="login.html" class="bg-white text-blue-600 px-4 py-2 rounded-lg hover:bg-gray-100 transition">Login</a>
+      `;
+    }
 });
