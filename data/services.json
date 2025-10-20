@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "service_name": "Cuci Kering Setrika",
+    "unit": "5kg",
+    "price": 40000,
+    "description": "Paket lengkap cuci, kering, dan setrika rapi",
+    "is_active": true,
+    "created_at": "2025-10-12 21:38:37"
+  },
+  {
+    "id": 2,
+    "service_name": "Cuci Kering Lipat",
+    "unit": "5kg",
+    "price": 25000,
+    "description": "Paket cuci, kering, dan lipat",
+    "is_active": true,
+    "created_at": "2025-10-12 21:38:37"
+  },
+  {
+    "id": 3,
+    "service_name": "Cuci Kering Saja",
+    "unit": "5kg",
+    "price": 22000,
+    "description": "Paket cuci dan kering tanpa setrika",
+    "is_active": true,
+    "created_at": "2025-10-12 21:38:37"
+  },
+  {
+    "id": 4,
+    "service_name": "Cuci Saja",
+    "unit": "5kg",
+    "price": 10000,
+    "description": "Hanya proses pencucian",
+    "is_active": true,
+    "created_at": "2025-10-12 21:38:37"
+  },
+  {
+    "id": 5,
+    "service_name": "Bedcover Besar",
+    "unit": "pcs",
+    "price": 35000,
+    "description": "Bedcover ukuran besar/king",
+    "is_active": true,
+    "created_at": "2025-10-12 21:38:37"
+  },
+  {
+    "id": 6,
+    "service_name": "Bedcover Kecil",
+    "unit": "pcs",
+    "price": 25000,
+    "description": "Bedcover ukuran single/queen",
+    "is_active": true,
+    "created_at": "2025-10-12 21:38:37"
+  },
+  {
+    "id": 7,
+    "service_name": "Sepatu",
+    "unit": "pasang",
+    "price": 25000,
+    "description": "Cuci sepatu semua jenis",
+    "is_active": true,
+    "created_at": "2025-10-12 21:38:37"
+  },
+  {
+    "id": 8,
+    "service_name": "Boneka Kecil",
+    "unit": "pcs",
+    "price": 25000,
+    "description": "Cuci boneka ukuran kecil-sedang",
+    "is_active": true,
+    "created_at": "2025-10-12 21:38:37"
+  },
+  {
+    "id": 9,
+    "service_name": "Karpet",
+    "unit": "m²",
+    "price": 15000,
+    "description": "Cuci karpet per meter persegi",
+    "is_active": true,
+    "created_at": "2025-10-12 21:38:37"
+  }
+]

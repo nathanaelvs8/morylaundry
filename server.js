@@ -5,7 +5,8 @@ const url = require("url");
 require("dotenv").config();
 
 // Import database
-const db = require("./config/db");
+//const db = require("./config/db-json");
+require("./config/db-json");
 
 // Import controllers
 const authController = require("./controllers/authController");
@@ -86,7 +87,7 @@ const server = http.createServer(async (req, res) => {
 
   try {
     // ============ SERVE FRONTEND FILES ============
-    
+
     // Serve index.html sebagai homepage
     if (pathname === "/" && method === "GET") {
       serveFile(res, path.join(__dirname, "index.html"));

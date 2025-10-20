@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "user_id": 2,
+    "order_number": "ML2510210001",
+    "customer_name": "Clement AW",
+    "phone_number": "08123456789",
+    "service_id": 1,
+    "quantity": 2,
+    "total_price": 80000,
+    "status": "Antrian",
+    "notes": "",
+    "entry_date": "2025-10-21 02:00:00",
+    "completed_date": null
+  },
+  {
+    "id": 2,
+    "user_id": "4",
+    "order_number": "ML2510219365",
+    "customer_name": "nathan",
+    "phone_number": "081299887766",
+    "service_id": 8,
+    "quantity": 1,
+    "total_price": 25000,
+    "notes": "",
+    "status": "Antrian",
+    "entry_date": "2025-10-20T19:41:19.184Z"
+  }
+]
