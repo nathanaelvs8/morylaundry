@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +9,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css">
 </head>
+
 <body class="bg-gray-50">
-    
+
     <!-- Navigation -->
     <nav class="gradient-bg text-white shadow-lg">
         <div class="container mx-auto px-4 py-4">
@@ -40,7 +42,7 @@
 
     <!-- Main Content -->
     <div class="container mx-auto px-4 py-8">
-        
+
         <!-- Header & Actions -->
         <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
             <div class="flex flex-col md:flex-row md:justify-between md:items-center">
@@ -48,7 +50,8 @@
                     <h1 class="text-3xl font-bold text-blue-600 mb-2">Kelola Pesanan</h1>
                     <p class="text-gray-600">Tambah, edit, atau hapus pesanan laundry</p>
                 </div>
-                <button id="add-order-btn" class="mt-4 md:mt-0 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition">
+                <button id="add-order-btn"
+                    class="mt-4 md:mt-0 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition">
                     <i class="fas fa-plus mr-2"></i> Tambah Pesanan
                 </button>
             </div>
@@ -59,6 +62,30 @@
 
         <!-- Orders Table -->
         <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <!-- Filter & Search Bar -->
+            <div
+                class="bg-white rounded-lg shadow p-4 mb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                <div class="flex items-center gap-3 w-full md:w-1/2">
+                    <i class="fas fa-search text-gray-500"></i>
+                    <input type="text" id="search-input" placeholder="Cari pesanan..."
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                </div>
+                <div class="flex items-center gap-3">
+                    <label for="status-filter" class="text-gray-600 font-medium">Status:</label>
+                    <select id="status-filter"
+                        class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                        <option value="">Semua Status</option>
+                        <option value="Antrian">Antrian</option>
+                        <option value="Proses Cuci">Proses Cuci</option>
+                        <option value="Proses Kering">Proses Kering</option>
+                        <option value="Setrika">Setrika</option>
+                        <option value="Siap Diambil">Siap Diambil</option>
+                        <option value="Selesai">Selesai</option>
+                        <option value="Dibatalkan">Dibatalkan</option>
+                    </select>
+                </div>
+            </div>
+
             <div class="overflow-x-auto">
                 <table class="w-full">
                     <thead class="gradient-bg text-white">
@@ -94,31 +121,33 @@
             </div>
             <form id="order-form" class="p-6 space-y-4">
                 <input type="hidden" id="order-id">
-                
+
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Pelanggan *</label>
-                    <select id="user-id" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none">
+                    <select id="user-id" required
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none">
                         <option value="">Pilih Pelanggan...</option>
                     </select>
                 </div>
 
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Nama Pelanggan *</label>
-                    <input type="text" id="customer-name" required 
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none"
-                           placeholder="Masukkan nama pelanggan">
+                    <input type="text" id="customer-name" required
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                        placeholder="Masukkan nama pelanggan">
                 </div>
 
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">No. Telepon</label>
-                    <input type="tel" id="phone-number" 
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none"
-                           placeholder="08xx xxxx xxxx">
+                    <input type="tel" id="phone-number"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                        placeholder="08xx xxxx xxxx">
                 </div>
 
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Layanan *</label>
-                    <select id="service-id" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none">
+                    <select id="service-id" required
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none">
                         <option value="">Pilih Layanan...</option>
                     </select>
                 </div>
@@ -126,13 +155,14 @@
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Jumlah *</label>
                     <input type="number" id="quantity" required min="1" step="0.01" value="1"
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none"
-                           placeholder="Jumlah">
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                        placeholder="Jumlah">
                 </div>
 
                 <div id="status-field" class="hidden">
                     <label class="block text-gray-700 font-semibold mb-2">Status *</label>
-                    <select id="status" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none">
+                    <select id="status"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none">
                         <option value="Antrian">Antrian</option>
                         <option value="Proses Cuci">Proses Cuci</option>
                         <option value="Proses Kering">Proses Kering</option>
@@ -145,16 +175,18 @@
 
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Catatan</label>
-                    <textarea id="notes" rows="3" 
-                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none"
-                              placeholder="Catatan tambahan (opsional)"></textarea>
+                    <textarea id="notes" rows="3"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                        placeholder="Catatan tambahan (opsional)"></textarea>
                 </div>
 
                 <div class="flex space-x-4 pt-4">
-                    <button type="submit" id="save-order-btn" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition">
+                    <button type="submit" id="save-order-btn"
+                        class="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition">
                         <i class="fas fa-save mr-2"></i> Simpan
                     </button>
-                    <button type="button" id="cancel-modal-btn" class="flex-1 bg-gray-400 hover:bg-gray-500 text-white px-6 py-3 rounded-lg font-semibold transition">
+                    <button type="button" id="cancel-modal-btn"
+                        class="flex-1 bg-gray-400 hover:bg-gray-500 text-white px-6 py-3 rounded-lg font-semibold transition">
                         <i class="fas fa-times mr-2"></i> Batal
                     </button>
                 </div>
@@ -164,4 +196,5 @@
 
     <script src="../js/admin-pesanan.js"></script>
 </body>
+
 </html>

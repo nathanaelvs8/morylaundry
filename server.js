@@ -4,63 +4,51 @@ const path = require("path");
 const url = require("url");
 require("dotenv").config();
 
-// Import database
-//const db = require("./config/db-json");
-require("./config/db-json");
-
 // Import controllers
 const authController = require("./controllers/authController");
 const orderController = require("./controllers/orderController");
 
 const PORT = process.env.PORT || 5000;
 
-// Helper function untuk parse request body
+// Parse body JSON
 function parseBody(req) {
   return new Promise((resolve, reject) => {
     let body = "";
-    req.on("data", chunk => {
-      body += chunk.toString();
-    });
+    req.on("data", chunk => body += chunk);
     req.on("end", () => {
       try {
         resolve(body ? JSON.parse(body) : {});
-      } catch (error) {
-        reject(error);
+      } catch (err) {
+        reject(err);
       }
     });
-    req.on("error", reject);
   });
 }
 
-// Helper function untuk send JSON response
-function sendResponse(res, statusCode, data) {
-  res.writeHead(statusCode, {
+// Kirim JSON response
+function sendResponse(res, status, data) {
+  res.writeHead(status, {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type, Authorization"
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
   });
   res.end(JSON.stringify(data));
 }
 
-// Helper function untuk serve file HTML/JS/CSS
+// Serve file
 function serveFile(res, filePath) {
   const ext = path.extname(filePath);
   const contentType = {
     ".html": "text/html",
     ".js": "application/javascript",
     ".css": "text/css",
-    ".png": "image/png",
-    ".jpg": "image/jpeg",
-    ".jpeg": "image/jpeg",
-    ".gif": "image/gif",
-    ".svg": "image/svg+xml"
   }[ext] || "text/plain";
 
   fs.readFile(filePath, (err, data) => {
     if (err) {
       res.writeHead(404, { "Content-Type": "text/html" });
-      res.end("<h1>404 - File not found</h1>");
+      res.end("<h1>404 File not found</h1>");
     } else {
       res.writeHead(200, { "Content-Type": contentType });
       res.end(data);
@@ -68,14 +56,12 @@ function serveFile(res, filePath) {
   });
 }
 
-// Create server
 const server = http.createServer(async (req, res) => {
-  // Handle CORS preflight
   if (req.method === "OPTIONS") {
     res.writeHead(200, {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type, Authorization"
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
     });
     res.end();
     return;
@@ -86,41 +72,18 @@ const server = http.createServer(async (req, res) => {
   const method = req.method;
 
   try {
-    // ============ SERVE FRONTEND FILES ============
-
-    // Serve index.html sebagai homepage
+    // ========== FRONTEND ==========
     if (pathname === "/" && method === "GET") {
       serveFile(res, path.join(__dirname, "index.html"));
       return;
     }
 
-    // Serve HTML files
-    if (pathname.endsWith(".html") && method === "GET") {
+    if (pathname.endsWith(".html") || pathname.endsWith(".css") || pathname.endsWith(".js")) {
       serveFile(res, path.join(__dirname, pathname));
       return;
     }
 
-    // Serve JavaScript files
-    if (pathname.startsWith("/js/") && method === "GET") {
-      serveFile(res, path.join(__dirname, pathname));
-      return;
-    }
-
-    // Serve CSS files
-    if (pathname.endsWith(".css") && method === "GET") {
-      serveFile(res, path.join(__dirname, pathname));
-      return;
-    }
-
-    // Serve image files
-    if (pathname.match(/\.(png|jpg|jpeg|gif|svg)$/i) && method === "GET") {
-      serveFile(res, path.join(__dirname, pathname));
-      return;
-    }
-
-    // ============ API ROUTES ============
-
-    // AUTH
+    // ========== AUTH API ==========
     if (pathname === "/api/auth/register" && method === "POST") {
       const body = await parseBody(req);
       await authController.register(req, res, body, sendResponse);
@@ -138,7 +101,7 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
-    // ORDERS
+    // ========== ORDER API ==========
     if (pathname === "/api/orders/public/services" && method === "GET") {
       await orderController.getServices(req, res, sendResponse);
       return;
@@ -155,20 +118,20 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
-    if (pathname.match(/^\/api\/orders\/\d+$/) && method === "GET") {
+    if (pathname.match(/^\/api\/orders\/[\w-]+$/) && method === "GET") {
       const id = pathname.split("/")[3];
       await orderController.getOrderById(req, res, id, sendResponse);
       return;
     }
 
-    if (pathname.match(/^\/api\/orders\/\d+$/) && method === "PUT") {
+    if (pathname.match(/^\/api\/orders\/[\w-]+$/) && method === "PUT") {
       const id = pathname.split("/")[3];
       const body = await parseBody(req);
       await orderController.updateOrder(req, res, id, body, sendResponse);
       return;
     }
 
-    if (pathname.match(/^\/api\/orders\/\d+$/) && method === "DELETE") {
+    if (pathname.match(/^\/api\/orders\/[\w-]+$/) && method === "DELETE") {
       const id = pathname.split("/")[3];
       await orderController.deleteOrder(req, res, id, sendResponse);
       return;
@@ -179,24 +142,13 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
-    // 404
-    sendResponse(res, 404, {
-      success: false,
-      message: "Endpoint tidak ditemukan"
-    });
-
-  } catch (error) {
-    console.error("Server error:", error);
-    sendResponse(res, 500, {
-      success: false,
-      message: "Terjadi kesalahan pada server"
-    });
+    sendResponse(res, 404, { success: false, message: "Endpoint tidak ditemukan" });
+  } catch (err) {
+    console.error("Server error:", err);
+    sendResponse(res, 500, { success: false, message: "Terjadi kesalahan di server" });
   }
 });
 
-// Start server
 server.listen(PORT, () => {
-  console.log(`✅ Server berjalan di http://localhost:${PORT}`);
-  console.log(`🌐 Frontend: http://localhost:${PORT}`);
-  console.log(`🔌 API: http://localhost:${PORT}/api`);
+  console.log(`✅ Server jalan di http://localhost:${PORT}`);
 });

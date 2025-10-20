@@ -70,23 +70,24 @@ async function getOrders(req, res, sendResponse) {
   const services = readJSON("services.json");
   const users = readJSON("users.json");
 
-let result = orders.map((o) => {
-  const service = services.find((s) => s.id === o.service_id) || {};
-  const user = users.find((u) => u.id === o.user_id) || {};
+  let result = orders.map((o) => {
+    const service = services.find((s) => s.id === o.service_id) || {};
+    const user = users.find((u) => u.id === o.user_id) || {};
 
-  return {
-    id: o.id,
-    order_number: o.order_number,
-    customer_name: o.customer_name,
-    user_full_name: user.full_name || user.username || "Tidak diketahui",
-    service_name: service.service_name || "Tidak diketahui",
-    unit: service.unit || "",
-    quantity: o.quantity,
-    total_price: o.total_price,
-    status: o.status,
-    entry_date: o.entry_date,
-  };
-});
+    return {
+      id: o.id,
+      user_id: o.user_id, // 🔥 tambahkan ini
+      order_number: o.order_number,
+      customer_name: o.customer_name,
+      user_full_name: user.full_name || user.username || "Tidak diketahui",
+      service_name: service.service_name || "Tidak diketahui",
+      unit: service.unit || "",
+      quantity: o.quantity,
+      total_price: o.total_price,
+      status: o.status,
+      entry_date: o.entry_date,
+    };
+  });
 
 
   if (decoded.role !== "admin") {
@@ -95,6 +96,35 @@ let result = orders.map((o) => {
 
   sendResponse(res, 200, { success: true, orders: result });
 }
+
+// Get single order by ID
+async function getOrderById(req, res, id, sendResponse) {
+  const decoded = verifyToken(req);
+  if (!decoded) return sendResponse(res, 401, { success: false, message: "Token tidak valid" });
+
+  const orders = readJSON("orders.json");
+  const services = readJSON("services.json");
+  const users = readJSON("users.json");
+
+  const order = orders.find((o) => o.id === Number(id));
+  if (!order) return sendResponse(res, 404, { success: false, message: "Pesanan tidak ditemukan" });
+
+  const service = services.find((s) => s.id === order.service_id) || {};
+  const user = users.find((u) => u.id === order.user_id) || {};
+
+  const orderDetail = {
+    ...order,
+    user_id: order.user_id,         // 🔥 penting
+    service_id: order.service_id,   // 🔥 penting
+    user_full_name: user.full_name || user.username || "Tidak diketahui",
+    service_name: service.service_name || "Tidak diketahui",
+    unit: service.unit || "",
+  };
+
+
+  sendResponse(res, 200, { success: true, order: orderDetail });
+}
+
 
 // Update order
 async function updateOrder(req, res, id, body, sendResponse) {
@@ -167,6 +197,7 @@ async function getCustomers(req, res, sendResponse) {
 module.exports = {
   createOrder,
   getOrders,
+  getOrderById,
   updateOrder,
   deleteOrder,
   getServices,
