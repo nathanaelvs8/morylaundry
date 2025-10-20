@@ -51,5 +51,44 @@
     "notes": null,
     "status": "Siap Diambil",
     "entry_date": "2025-10-20T21:28:28.299Z"
+  },
+  {
+    "id": 5,
+    "user_id": 3,
+    "order_number": "ML2510217110",
+    "customer_name": "Nathan",
+    "phone_number": "081233445566",
+    "service_id": 6,
+    "quantity": 2,
+    "total_price": 50000,
+    "notes": "",
+    "status": "Antrian",
+    "entry_date": "2025-10-20T21:43:44.797Z"
+  },
+  {
+    "id": 6,
+    "user_id": 5,
+    "order_number": "ML2510217931",
+    "customer_name": "MIchael",
+    "phone_number": "081269695856",
+    "service_id": 7,
+    "quantity": 3,
+    "total_price": 75000,
+    "notes": null,
+    "status": "Antrian",
+    "entry_date": "2025-10-20T21:45:14.580Z"
+  },
+  {
+    "id": 7,
+    "user_id": 5,
+    "order_number": "ML2510218345",
+    "customer_name": "MIchael",
+    "phone_number": "081269695856",
+    "service_id": 4,
+    "quantity": 3,
+    "total_price": 30000,
+    "notes": "Secepatnya",
+    "status": "Proses Cuci",
+    "entry_date": "2025-10-20T21:56:48.315Z"
   }
 ]
